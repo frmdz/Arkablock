@@ -8,33 +8,30 @@ const height=canvas.height;
 var posx = canvas.width/2;
 var posy = canvas.height/2;
 
-var xacel = 1.3;
-var yacel = -0.7;
+var rPressed = false;
+var lPressed = false;
 
-function Pelota(x,y,tam) {
-  this.x = x;
-  this.y = y;
-  this.tam = tam;
-  this.dibujar = function() {
-    context.fillStyle = "white";
-    context.fillRect(x-tam/2,y-tam/2,tam,tam);
-    x += xacel;
-    y += yacel;
-    if(y-5<=0) yacel = -yacel;
-    if(x-5>=width-5 || x-5<=0) xacel = -xacel;
-    if(y-5>=height-5){
-      x=posx;
-      y=posy;
-    }
-  }
+var GameOver = false;
+
+function iniciar (){
+  setInterval(refrescar,10);
 }
 
 function refrescar(){
-  context.clearRect(0,0,width,height);
-  pelo.dibujar();
-
+  if (GameOver == false) {
+    context.clearRect(0,0,width,height);
+    pelo.dibujar();
+    pelo.mover();
+    raqu.mover();
+    raqu.dibujar();
+  }
 }
 
-var pelo = new Pelota(posx,posy,10);
+document.addEventListener("keydown", kdown);
+document.addEventListener("keyup", kup);
 
-setInterval(refrescar,10);
+var pelo = new Pelota(posx,posy,10,2.0,-1.0);
+var raqu  = new Raqueta(posx,height-25,96,15);
+
+
+iniciar();
