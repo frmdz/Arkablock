@@ -19,13 +19,12 @@ class Pelota {
         this.accel_y = -this.accel_y;
       }
 
-      if (this.y+this.radio >= raque_1.y-raque_1.ytam/2 && this.y+this.radio <=raque_1.y-3 ) {
+      if (this.y-this.radio >= canvas.height) {
+        this.y = canvas.height/2;
+      }else if (this.y+this.radio >= raque_1.y-raque_1.ytam/2 && this.y+this.radio <=raque_1.y-3 ) {
         if (this.x+this.radio >= raque_1.x-raque_1.xtam/2 && this.x-this.radio <= raque_1.x+raque_1.xtam/2) {
           this.accel_y = -this.accel_y;
         }
-      }
-      if (this.y-this.radio >= canvas.height) {
-          this.y = canvas.height/2;
       }
 
       this.x += this.accel_x;
