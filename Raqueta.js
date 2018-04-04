@@ -1,17 +1,22 @@
-function Raqueta (x,y,xtam,ytam){
-  this.x = x;
-  this.y = y
-  this.xtam = xtam;
-  this.ytam = ytam;
-
-  this.dibujar = function() {
-      context.fillStyle = "white";
-      context.fillRect(x-xtam/2,y-ytam/2,xtam,ytam);
+class Raqueta {
+  constructor(x, y, xtam, ytam, rPressed, lPressed, izq, der) {
+    this.x = x;
+    this.y = y;
+    this.xtam = xtam;
+    this.ytam = ytam;
+    this.rPressed = rPressed;
+    this.lPressed = lPressed;
+    this.izq = izq;
+    this.der = der;
   }
 
-  this.mover = function () {
-    if (rPressed == true && x+xtam/2 < width-5) x += 4;
-    if (lPressed == true && x-xtam/2 >= 5)x -= 4;
+  dibujar() {
+    context.fillStyle = "white";
+    context.fillRect(this.x-this.xtam/2, this.y-this.ytam/2, this.xtam, this.ytam);
   }
 
+  mover() {
+    if (rPressed == true && this.x+this.xtam/2 < canvas.width-5) this.x += 10;
+    if (lPressed == true && this.x-this.xtam/2 >= 5) this.x -= 10;
+  }
 }

@@ -1,10 +1,15 @@
-function kup (e) {
-  if(e.keyCode == 39) rPressed = false;
-  else if(e.keyCode == 37) lPressed = false;
+document.addEventListener("keydown", kdown);
+ document.addEventListener("keyup", kup);
 
+var rPressed = false;
+var lPressed = false;
+
+function kup (e) {
+  if (e.keyCode == raque_1.der) rPressed = false;
+  else if (e.keyCode == raque_1.izq) lPressed = false;
 }
 
 function kdown (e) {
-  if(e.keyCode == 39) rPressed = true;
-  if(e.keyCode == 37) lPressed = true;
+  if (e.keyCode == raque_1.der) rPressed = true;
+  else if (e.keyCode == raque_1.izq) lPressed = true;
 }
