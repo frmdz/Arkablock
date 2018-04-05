@@ -1,5 +1,5 @@
 document.addEventListener("keydown", kdown);
- document.addEventListener("keyup", kup);
+document.addEventListener("keyup", kup);
 
 var rPressed = false;
 var lPressed = false;
