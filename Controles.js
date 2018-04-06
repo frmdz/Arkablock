@@ -5,11 +5,11 @@ var rPressed = false;
 var lPressed = false;
 
 function kup (e) {
-  if (e.keyCode == raque_1.der) rPressed = false;
-  if (e.keyCode == raque_1.izq) lPressed = false;
+  if (e.keyCode == 39) rPressed = false;
+  if (e.keyCode == 37) lPressed = false;
 }
 
 function kdown (e) {
-  if (e.keyCode == raque_1.der) rPressed = true;
-  if (e.keyCode == raque_1.izq) lPressed = true;
+  if (e.keyCode == 39) rPressed = true;
+  if (e.keyCode == 37) lPressed = true;
 }

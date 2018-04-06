@@ -1,11 +1,9 @@
 class Raqueta {
-  constructor(x, y, xtam, ytam, izq, der) {
+  constructor(x, y, xtam, ytam) {
     this.x = x;
     this.y = y;
     this.xtam = xtam;
     this.ytam = ytam;
-    this.izq = izq;
-    this.der = der;
   }
 
   dibujar() {
