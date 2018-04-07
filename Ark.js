@@ -9,6 +9,7 @@ let vidas = 3;
 
 let nivel = nivel_1;
 let num = 9;
+let num_pelotas = 1;
 
 function refrescar(){
   if (GameOver == false) {
@@ -27,7 +28,7 @@ function refrescar(){
   }
 }
 
-let pelo_1 = new Pelota(canvas.width/4, canvas.height/2, 10, 7, 10 );
-let raque_1 = new Raqueta(canvas.width/2, canvas.height-25, 96, 14);
+let pelo_1 = new Pelota(canvas.width/2, canvas.height-50, 10, 5, -8 );
+let raque_1 = new Raqueta(canvas.width/2, canvas.height-25,80, 14);
 
 refrescar();
