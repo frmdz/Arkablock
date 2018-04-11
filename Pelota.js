@@ -1,6 +1,6 @@
 class Pelota {
-  constructor(x, y, tam, accel_x, accel_y) {
-    this.caida = false;
+  constructor(x, y, tam, accel_x, accel_y,caida) {
+    this.caida = caida;
     this.x = x;
     this.y = y;
     this.tam = tam;
@@ -37,7 +37,7 @@ class Pelota {
   }
 
   detectarCaida() {
-    if (this.y-this.radio > canvas.height+300 && this.y <= canvas.height+500  ) {
+    if (this.y-this.radio > canvas.height+200 && this.y <= canvas.height+500  ) {
       bolas -= 1;
       golpes = 0;
         if (bolas == 0) {
@@ -54,12 +54,12 @@ class Pelota {
     }
   }
 
-  colicionBloque(){
-  if (this.y-20 < 50+(19*num)) {
-    for (let i=0; i<num; i++) {
-      for (let j=0; j<13; j++) {
-        if (nivel[i][j] > 0) {
-          //// (2+(46*j), 50+(19*i), 44, 17)
+  colicionBloque() {
+    if (this.y-20 < 50+(19*num)) {
+      for (let i=0; i<num; i++) {
+        for (let j=0; j<13; j++) {
+          if (nivel[i][j] > 0) {
+            //// (2+(46*j), 50+(19*i), 44, 17)
           if (this.y-this.radio <= (50+(19*i))+17 && this.y-this.radio >= 50+(19*i)) {
             if (this.x+this.radio/2 >= (2+(46*j)) && this.x-this.radio/2 <= (2+(46*j))+44 ) {
               this.y = ((50+(19*i))+16)+1+this.radio;
@@ -90,12 +90,13 @@ class Pelota {
               this.x =  (2+(46*j))+43+this.radio;
               nivel[i][j] -= 1;
             }
-          }//der
+          }//der 
+            
+          }
         }
       }
     }
   }
-}
 
   golpeAngulo() {
     if (this.y+this.radio >= raque_1.y-raque_1.ytam/2 && this.y+this.radio <= raque_1.y+raque_1.ytam/2) {

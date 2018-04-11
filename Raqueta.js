@@ -16,11 +16,11 @@ class Raqueta {
   }
 
   mover() {
-    if (rPressed == true && this.x+this.xtam/2 < canvas.width-10) {
-      this.x += 10;
-    }
-    if (lPressed == true && this.x-this.xtam/2 >= 10) {
-      this.x -= 10;
-    }
+      if (rPressed == true && this.x+this.xtam/2 < canvas.width-10) {
+        this.x += 10;
+      }
+      if (lPressed == true && this.x-this.xtam/2 >= 10) {
+        this.x -= 10;
+      }
   }
 }
