@@ -9,7 +9,7 @@ class Raqueta {
   dibujar() {
     context.fillStyle = "white";
     context.fillRect(this.x-this.xtam/2, this.y-this.ytam/2, this.xtam/4, this.ytam);
-    context.fillStyle = "grey";
+    context.fillStyle = "#bdbdbd";
     context.fillRect(this.x-this.xtam/4, this.y-this.ytam/2, this.xtam/2, this.ytam);
     context.fillStyle = "white";
     context.fillRect(this.x+this.xtam/4, this.y-this.ytam/2, this.xtam/4, this.ytam);

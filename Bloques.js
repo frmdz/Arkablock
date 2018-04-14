@@ -43,7 +43,7 @@ function dibujarBloques() {
       for (let j=0; j<13; j++) {
         if (nivel[i][j] > 0) {
           if (nivel[i][j] == 2) {
-              context.fillStyle = "grey";
+              context.fillStyle = "#bdbdbd";
             }else {
               context.fillStyle = "white";
             }
