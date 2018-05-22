@@ -1,7 +1,6 @@
-let nivel;
-let num;
+let nivel, num;
 
-function setNivel(num_nivel){
+function setNivel(num_nivel) {
   switch (num_nivel) {
     case 1:
       num = 9;
@@ -17,9 +16,11 @@ function setNivel(num_nivel){
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1]
       ];
       break;
+
     case 2:
-      num = 13;
+      num = 14;
       nivel = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],

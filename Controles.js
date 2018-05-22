@@ -14,7 +14,7 @@ function kdown (e) {
   if (e.keyCode == 37) lPressed = true;
   if (e.keyCode == 32 && GameOver == true){
       GameOver = false;
-  }else if (e.keyCode == 32 && GameOver == false && bolas == 0) {
+  } else if (e.keyCode == 32 && GameOver == false && bolas == 0) {
     bolas = 1;
   }
 }
