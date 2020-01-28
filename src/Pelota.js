@@ -11,10 +11,8 @@ class Pelota {
     this.tam = tam;
     this.accel_x = accel_x;
     this.accel_y = accel_y;
-    this.accel_x_recto = Math.abs(this.accel_x) - 2;
-    this.accel_y_recto = Math.abs(this.accel_y) + 2;
-    this.accel_x_agudo = Math.abs(this.accel_x);
-    this.accel_y_agudo = Math.abs(this.accel_y);
+    this.accelrecto = [-(Math.abs(this.accel_x) - 2), -(Math.abs(this.accel_y) + 2)];
+    this.accelagudo = [-Math.abs(this.accel_x), -Math.abs(this.accel_y)];
     this.radio = this.tam / 2;
   }
   dibujar() {
@@ -85,37 +83,12 @@ class Pelota {
       }
     }
   }
-  //TODO: Re-implement this mess.
-  golpeAngulo(raque_1) {
-    if (this.y + this.radio >= raque_1.y - raque_1.ytam / 2 && this.y + this.radio <= raque_1.y + raque_1.ytam / 2) {
-      if (this.x <= raque_1.x && this.x + this.radio >= raque_1.x - raque_1.xtam / 2) {
-        if (this.x > raque_1.x - raque_1.xtam / 4) {
-          //2
-          this.accel_y = -this.accel_y_recto;
-          this.accel_x = -this.accel_x_recto;
-          this.y = raque_1.y - raque_1.ytam;
-        }
-        else {
-          //1
-          this.accel_y = -this.accel_y_agudo;
-          this.accel_x = -this.accel_x_agudo;
-          this.y = raque_1.y - raque_1.ytam;
-        }
-      }
-      else if (this.x >= raque_1.x && this.x - this.radio <= raque_1.x + raque_1.xtam / 2) {
-        if (this.x < raque_1.x + raque_1.xtam / 4) {
-          //3
-          this.accel_y = -this.accel_y_recto;
-          this.accel_x = +this.accel_x_recto;
-          this.y = raque_1.y - raque_1.ytam;
-        }
-        else {
-          //4
-          this.accel_y = -this.accel_y_agudo;
-          this.accel_x = +this.accel_x_agudo;
-          this.y = raque_1.y - raque_1.ytam;
-        }
-      }
+  golpeAngulo(raque_1) { 
+    if (this.y + this.radio >= raque_1.y - raque_1.ytam / 2 && this.y + this.radio <= raque_1.y + raque_1.ytam / 2 && 
+      this.x + this.radio >= raque_1.x - raque_1.xtam / 2 && this.x - this.radio <= raque_1.x + raque_1.xtam / 2) {        
+        [this.accel_y, this.accel_y] = (this.x < raque_1.x - raque_1.xtam / 4 || this.x > raque_1.x + raque_1.xtam / 4) ?  this.accelagudo : this.accelrecto;
+        this.accel_x = (this.x > raque_1.x) ? Math.abs(this.accel_x) : -Math.abs(this.accel_x);
+        this.y = raque_1.y - raque_1.ytam;
     }
   }
 }
