@@ -56,8 +56,8 @@ class Pelota {
       NIVEL.forEach(row => {
         row.forEach(element => {
           if(this.colicion(element) && element.state > 0){
-            this.y -= this.accel_y;
-            this.x -= this.accel_x;
+            this.y -= this.accel_y/2;
+            this.x -= this.accel_x/2;
             element.state -= 1;
 
             let l = Math.abs((this.x+this.tam) - element.x),
