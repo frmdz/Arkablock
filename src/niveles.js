@@ -62,7 +62,7 @@ export function setLvl(lvlnumber) {
   for (let i=0; i<NIVEL.length; i++) {
     for (let j=0; j<NIVEL[0].length; j++) {
       let temp = NIVEL[i][j];
-      NIVEL[i][j] = {state:temp, x:2+(46*j), y:50+(19*i), width:44, height:17};
+      NIVEL[i][j] = {state:temp, x: 1 + (46*j), y:50+(20*i), width:46, height:20};
     }
   }
 }
@@ -72,7 +72,7 @@ export function dibujarBloques() {
     row.forEach(element => {
       if(element.state){
         context.fillStyle = (element.state == 2) ? "#bdbdbd" : "white";
-        context.fillRect(element.x, element.y, 44, 17);
+        context.fillRect(element.x, element.y, element.width-2, element.height-2);
       }
     });
   });
