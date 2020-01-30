@@ -14,8 +14,8 @@ let GAMEOVER = false;
 let NIVEL = 1;
 let VIDAS = 3;
 
-let pelota = new Pelota(canvas.width/2,canvas.height-50, 10, 5, -8, true, VIDAS);
-let raqueta = new Raqueta(canvas.width/2, canvas.height-25, 80, 14);
+let pelota = new Pelota(canvas.width/2,canvas.height-50, 10, 5, 8, true, VIDAS);
+let raqueta = new Raqueta(canvas.width/2 - 40, canvas.height-32, 80, 14);
 
 function kup (e) {
   //right
