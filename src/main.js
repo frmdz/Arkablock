@@ -58,7 +58,7 @@ function kdown (e) {
   if (e.keyCode == 32 && (gameover || change_level)){
     gameover = false;
     change_level = false;
-    lifes = current_level*total_lifes + lifes
+    current_lifes = current_level*total_lifes + current_lifes
     pad.x = canvas.width/2 - pad.width;
     ball.state = false;
     ball.n_destroyed_blocks = 0
@@ -79,11 +79,11 @@ function main() {
     draw_score(current_level, current_lifes);
     draw_blocks();
     pad.draw();
-    ball.draw();
     pad.move();
-    ball.move(pad);
+    ball.draw();
     ball.angle_hit(pad);
     ball.block_collision(blocks, n_rows);
+    ball.move(pad);
 
     if (ball.detect_fall()) {
       current_lifes--;
