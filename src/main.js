@@ -1,70 +1,103 @@
-//TODO: Translate Variables.
+import Pad from './Pad.js';
+import Ball from './Ball.js';
+import {n_rows, draw_blocks, set_level, level_sum, blocks} from './levels.js';
 
-import Raqueta from './Raqueta.js';
-import Pelota from './Pelota.js';
-import {dibujarBloques, setLvl} from './niveles.js';
-
-export let canvas = document.getElementById("canvas");
-export let context = canvas.getContext("2d");
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
 
 document.addEventListener("keydown", kdown);
 document.addEventListener("keyup", kup);
 
-let GAMEOVER = false;
-let NIVEL = 1;
-let VIDAS = 3;
+let gameover = false;
+let change_level = false;
+let total_lifes = 10;
+let current_level = 1;
+let current_lifes = current_level*total_lifes;
 
-let pelota = new Pelota(canvas.width/2,canvas.height-50, 10, 5, 8, true, VIDAS);
-let raqueta = new Raqueta(canvas.width/2 - 40, canvas.height-32, 80, 14);
+const ball = new Ball(canvas.width/2, canvas.height-50, 10, 5, 8, false);
+const pad = new Pad(canvas.width/2 - 40, canvas.height-32, 80, 14);
+
+function draw_score(level, lifes) {
+  context.font = "20px Arial";
+  context.fillText("Level: " + level, 5, 20);
+  context.fillText("Lifes: " + lifes, 100, 20);
+}
+
+function draw_screen(s, s2) {
+  context.font = "60px Arial";
+  context.fillText(s, canvas.width/2 - 170, canvas.height/2 - 100);
+  context.font = "30px Arial";
+  context.fillText(s2, canvas.width/2 - 170, canvas.height/2 - 20);
+}
+
+function clear_screen() {
+  context.clearRect(0,0,canvas.width,canvas.height);
+}
 
 function kup (e) {
   //right
   if (e.keyCode == 39) {
-    raqueta.rkey = false;
+    pad.rkey = false;
   }
   //left
   if (e.keyCode == 37) {
-    raqueta.lkey = false;
+    pad.lkey = false;
   }
 }
 
 function kdown (e) {
   //right
   if (e.keyCode == 39) {
-    raqueta.rkey = true;
+    pad.rkey = true;
   }
   //left
   if (e.keyCode == 37) {
-    raqueta.lkey = true;
+    pad.lkey = true;
   }
   //spacebar
-  if (e.keyCode == 32 && GAMEOVER){
-    GAMEOVER = false;
-    pelota.gameover = VIDAS;
-    setLvl(NIVEL);
-  } else if (e.keyCode == 32 && !GAMEOVER) {
-    pelota.caida = false;
+  if (e.keyCode == 32 && (gameover || change_level)){
+    gameover = false;
+    change_level = false;
+    lifes = current_level*total_lifes + lifes
+    pad.x = canvas.width/2 - pad.width;
+    ball.state = false;
+    ball.n_destroyed_blocks = 0
+    set_level(current_level);
+  } else if (e.keyCode == 32 && !gameover) {
+    ball.state = true;
   }
 }
 
+
 function main() {
-  if (!GAMEOVER) {
-    context.clearRect(0,0,canvas.width,canvas.height);
-    dibujarBloques();
-    raqueta.mover();
-    raqueta.dibujar();
-    pelota.dibujar();
-    pelota.mover(raqueta);
-    pelota.golpeAngulo(raqueta);
-    pelota.colicionBloque();
-    GAMEOVER = pelota.detectarCaida(); 
+  clear_screen()
+  if (gameover) {
+    draw_screen("Game Over :(", "Press Space to Restart!")
+  } else if (change_level) {
+    draw_screen("New Level!", "Press Space to Continue!")
   } else {
-    //TODO: Add a Gameover screen.
-    context.clearRect(0,0,canvas.width,canvas.height);
-    raqueta.x = canvas.width/2;
+    draw_score(current_level, current_lifes);
+    draw_blocks();
+    pad.draw();
+    ball.draw();
+    pad.move();
+    ball.move(pad);
+    ball.angle_hit(pad);
+    ball.block_collision(blocks, n_rows);
+
+    if (ball.detect_fall()) {
+      current_lifes--;
+      ball.state = false;
+      gameover = (current_lifes <= 0);
+    }
+
+    if (level_sum == ball.n_destroyed_blocks) {
+      set_level(++current_level);
+      change_level = true;
+    }
   }
   requestAnimationFrame(main);
 } 
 
-setLvl(NIVEL);
+set_level(current_level);
 main();

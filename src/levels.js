@@ -1,42 +1,42 @@
-import {context} from './main.js';
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
 
-export let FILAS, NIVEL;
+export let n_rows, blocks, level_sum;
 
-export function setLvl(lvlnumber) {
-  switch(lvlnumber){
+export function set_level(level_number) {
+  switch(level_number) {
     case 1:
-      NIVEL = [[2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
-              [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
-              [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
+      blocks = [[2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1]];
-      FILAS = NIVEL.length;
+      n_rows = blocks.length;
       break;
     
     case 2:
-      NIVEL = [[2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
+      blocks = [[2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
+              [2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
-              [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
+              [2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1]];
 
-      FILAS = NIVEL.length;
+      n_rows = level.length;
       break;
 
     case 3:
-      NIVEL = [[2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
+      blocks = [[2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
@@ -55,20 +55,23 @@ export function setLvl(lvlnumber) {
               [2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1]];
 
-      FILAS = NIVEL.length;
+      n_rows = level.length;
       break;
   }
 
-  for (let i=0; i<NIVEL.length; i++) {
-    for (let j=0; j<NIVEL[0].length; j++) {
-      let temp = NIVEL[i][j];
-      NIVEL[i][j] = {state:temp, x: 1 + (46*j), y:50+(20*i), width:46, height:20};
+  level_sum = 0
+  for (let i=0; i<blocks.length; i++) {
+    for (let j=0; j<blocks[0].length; j++) {
+      level_sum += blocks[i][j];
+      //magic numbers go brrrrr!
+      blocks[i][j] = {state:blocks[i][j], x: 1 + (46*j), y:50+(20*i), width:46, height:20}; //magic numbers go brrrrr!
     }
   }
 }
 
-export function dibujarBloques() {
-  NIVEL.forEach(row => {
+export
+function draw_blocks() {
+  blocks.forEach(row => {
     row.forEach(element => {
       if(element.state){
         context.fillStyle = (element.state == 2) ? "#bdbdbd" : "white";
