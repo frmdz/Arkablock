@@ -32,7 +32,7 @@ export function set_level(level_number) {
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1]];
 
-      n_rows = level.length;
+      n_rows = blocks.length;
       break;
 
     case 3:
@@ -55,7 +55,7 @@ export function set_level(level_number) {
               [2, 2, 2 ,2 ,2 ,2 ,2 ,2 ,2, 2 ,2 ,2 ,2],
               [1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1 ,1]];
 
-      n_rows = level.length;
+      n_rows = blocks.length;
       break;
   }
 

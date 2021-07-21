@@ -82,8 +82,8 @@ function main() {
     pad.move();
     ball.draw();
     ball.angle_hit(pad);
-    ball.block_collision(blocks, n_rows);
     ball.move(pad);
+    ball.block_collision(blocks, n_rows);
 
     if (ball.detect_fall()) {
       current_lifes--;
