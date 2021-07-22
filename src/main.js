@@ -10,17 +10,17 @@ document.addEventListener("keyup", kup);
 
 let gameover = false;
 let change_level = false;
-let total_lifes = 10;
+let total_lives = 10;
 let current_level = 1;
-let current_lifes = current_level*total_lifes;
+let current_lives = current_level*total_lives;
 
 const ball = new Ball(canvas.width/2, canvas.height-50, 10, 5, 8, false);
 const pad = new Pad(canvas.width/2 - 40, canvas.height-32, 80, 14);
 
-function draw_score(level, lifes) {
+function draw_score(level, lives) {
   context.font = "20px Arial";
   context.fillText("Level: " + level, 5, 20);
-  context.fillText("Lifes: " + lifes, 100, 20);
+  context.fillText("lives: " + lives, 100, 20);
 }
 
 function draw_screen(s, s2) {
@@ -58,7 +58,7 @@ function kdown (e) {
   if (e.keyCode == 32 && (gameover || change_level)){
     gameover = false;
     change_level = false;
-    current_lifes = current_level*total_lifes + current_lifes
+    current_lives = current_level*total_lives + current_lives
     pad.x = canvas.width/2 - pad.width;
     ball.state = false;
     ball.n_destroyed_blocks = 0
@@ -76,7 +76,7 @@ function main() {
   } else if (change_level) {
     draw_screen("New Level!", "Press Space to Continue!")
   } else {
-    draw_score(current_level, current_lifes);
+    draw_score(current_level, current_lives);
     draw_blocks();
     pad.draw();
     pad.move();
@@ -86,9 +86,9 @@ function main() {
     ball.block_collision(blocks, n_rows);
 
     if (ball.detect_fall()) {
-      current_lifes--;
+      current_lives--;
       ball.state = false;
-      gameover = (current_lifes <= 0);
+      gameover = (current_lives <= 0);
     }
 
     if (level_sum == ball.n_destroyed_blocks) {
